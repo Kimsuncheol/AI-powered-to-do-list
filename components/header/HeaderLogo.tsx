@@ -1,25 +1,30 @@
 'use client';
-import { Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 export default function HeaderLogo() {
   const router = useRouter();
 
   return (
-    <Typography 
-      variant="h6" 
-      component="div" 
+    <Box 
       sx={{ 
-        cursor: 'pointer', 
-        fontWeight: 'bold',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        backgroundClip: 'text',
-        WebkitBackgroundClip: 'text',
-        WebkitTextFillColor: 'transparent',
+        display: 'flex', 
+        alignItems: 'center', 
+        cursor: 'pointer',
+        height: 40,
+        width: 150,
+        position: 'relative'
       }}
       onClick={() => router.push('/')}
     >
-      AI To-Do
-    </Typography>
+      <Image
+        src="/header-logo.png"
+        alt="AI To-Do Logo"
+        fill
+        style={{ objectFit: 'contain' }}
+        priority
+      />
+    </Box>
   );
 }

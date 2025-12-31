@@ -13,7 +13,7 @@ const plans = [
     price: '₩0',
     period: '/month',
     description: 'Perfect for getting started',
-    features: ['5 Tasks per day', 'Basic AI parsing', 'Email support'],
+    features: ['5 Tasks per day', 'Basic AI parsing', '10 AI Agent calls/month', 'Email support'],
     color: '#6b7280',
     icon: <CheckCircleIcon />,
   },
@@ -23,7 +23,7 @@ const plans = [
     price: '₩9,900',
     period: '/month',
     description: 'Best for professionals',
-    features: ['Unlimited Tasks', 'Advanced AI features', 'Priority support', 'Custom tags'],
+    features: ['Unlimited Tasks', 'Advanced AI features', '100 AI Agent calls/month', 'Priority support', 'Custom tags'],
     color: '#667eea',
     icon: <StarIcon />,
     popular: true,
@@ -34,7 +34,7 @@ const plans = [
     price: '₩29,900',
     period: '/month',
     description: 'For teams and businesses',
-    features: ['Everything in Pro', 'Team collaboration', 'Analytics dashboard', 'API access', 'Dedicated support'],
+    features: ['Everything in Pro', 'Unlimited AI Agent calls', 'Team collaboration', 'Analytics dashboard', 'API access', 'Dedicated support'],
     color: '#764ba2',
     icon: <RocketLaunchIcon />,
   },
@@ -55,7 +55,7 @@ export default function BillingPage() {
         </Typography>
       </Box>
 
-      {/* Current Plan Info */}
+      {/* Current Plan Info & Usage */}
       {billingInfo.plan !== 'free' && (
         <Paper 
           elevation={0} 
@@ -68,18 +68,55 @@ export default function BillingPage() {
             borderColor: 'primary.main',
           }}
         >
-          <Stack direction="row" alignItems="center" spacing={2}>
-            <CreditCardIcon color="primary" />
-            <Box>
-              <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
-                Current Plan: {billingInfo.plan.charAt(0).toUpperCase() + billingInfo.plan.slice(1)}
-              </Typography>
-              {billingInfo.cardLast4 && (
-                <Typography variant="body2" color="text.secondary">
-                  Card ending in •••• {billingInfo.cardLast4}
+          <Stack direction="row" alignItems="center" justifyContent="space-between">
+            <Stack direction="row" alignItems="center" spacing={2}>
+              <CreditCardIcon color="primary" />
+              <Box>
+                <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                  Current Plan: {billingInfo.plan.charAt(0).toUpperCase() + billingInfo.plan.slice(1)}
                 </Typography>
-              )}
+                {billingInfo.cardLast4 && (
+                  <Typography variant="body2" color="text.secondary">
+                    Card ending in •••• {billingInfo.cardLast4}
+                  </Typography>
+                )}
+              </Box>
+            </Stack>
+            <Box sx={{ textAlign: 'right' }}>
+              <Typography variant="caption" color="text.secondary" display="block">
+                AI Agent Usage
+              </Typography>
+              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                {billingInfo.usage.agentCallsThisMonth} / {billingInfo.usage.agentCallsLimit === Infinity ? '∞' : billingInfo.usage.agentCallsLimit}
+              </Typography>
             </Box>
+          </Stack>
+        </Paper>
+      )}
+      
+      {/* Free Plan Usage */}
+      {billingInfo.plan === 'free' && billingInfo.usage.agentCallsThisMonth > 0 && (
+        <Paper 
+          elevation={0} 
+          sx={{ 
+            p: 3, 
+            mb: 4, 
+            borderRadius: 2, 
+            bgcolor: 'warning.light',
+            border: '1px solid',
+            borderColor: 'warning.main',
+          }}
+        >
+          <Stack spacing={1}>
+            <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+              Free Plan AI Agent Usage
+            </Typography>
+            <Typography variant="h6">
+              {billingInfo.usage.agentCallsThisMonth} / {billingInfo.usage.agentCallsLimit} calls this month
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Upgrade to Pro for 100 calls/month or Enterprise for unlimited calls!
+            </Typography>
           </Stack>
         </Paper>
       )}
