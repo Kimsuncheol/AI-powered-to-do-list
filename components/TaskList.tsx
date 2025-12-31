@@ -7,13 +7,14 @@ import { parseTaskAction } from "@/actions/aiActions";
 import TaskItem from "./TaskItem";
 import TaskInput from "./TaskInput";
 import { useAuth } from "@/contexts/AuthContext";
-import { useRouter } from "next/navigation";
+import { useAuthStore } from "@/store/authStore";
+import { Button } from "@mui/material";
 
 export default function TaskList() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
   const { user, loading: authLoading } = useAuth();
-  const router = useRouter();
+  const { setOpenModal } = useAuthStore();
 
   const loadTasks = useCallback(async () => {
     if (!user) return;
@@ -31,12 +32,12 @@ export default function TaskList() {
   useEffect(() => {
     if (!authLoading) {
       if (!user) {
-        router.push("/login");
+        setOpenModal('signIn');
       } else {
         loadTasks();
       }
     }
-  }, [user, authLoading, router, loadTasks]);
+  }, [user, authLoading, setOpenModal, loadTasks]);
 
   const handleAddTask = async (title: string, isAi: boolean) => {
     if (!user) return;
@@ -108,7 +109,7 @@ export default function TaskList() {
     }
   };
 
-  if (authLoading || loading) {
+  if (authLoading || (user && loading)) {
     return (
       <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
         <CircularProgress />
@@ -116,7 +117,28 @@ export default function TaskList() {
     );
   }
 
-  if (!user) return null; // Should redirect
+  if (!user) {
+    return (
+      <Container maxWidth="sm" sx={{ mt: 8, textAlign: 'center' }}>
+        <Typography variant="h5" color="text.secondary" gutterBottom>
+          Please sign in to view your tasks
+        </Typography>
+        <Button 
+          variant="contained" 
+          onClick={() => setOpenModal('signIn')}
+          sx={{ 
+            mt: 2, 
+            borderRadius: 2, 
+            textTransform: 'none',
+            fontWeight: 600,
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' 
+          }}
+        >
+          Sign In
+        </Button>
+      </Container>
+    );
+  }
 
   return (
     <Container maxWidth="sm" sx={{ mt: 4 }}>

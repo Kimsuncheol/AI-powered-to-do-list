@@ -131,7 +131,7 @@ export default function SignInModal({
 
           <Box sx={{ mt: 3, textAlign: 'center' }}>
             <Typography variant="body2">
-              Don't have an account?{' '}
+              Don&apos;t have an account?{' '}
               <Typography
                 component="span"
                 variant="body2"

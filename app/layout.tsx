@@ -3,6 +3,7 @@ import ThemeRegistry from "@/components/ThemeRegistry/ThemeRegistry";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { BillingProvider } from "@/contexts/BillingContext";
 import Header from "@/components/Header";
+import AuthModals from "@/components/auth/AuthModals";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -23,6 +24,7 @@ export default function RootLayout({
             <BillingProvider>
               <Header />
               {children}
+              <AuthModals />
             </BillingProvider>
           </AuthProvider>
         </ThemeRegistry>
