@@ -137,7 +137,7 @@ export default function NewTaskForm({ onSaved }: NewTaskFormProps) {
               label="Priority"
               onChange={(e) => setPriority(e.target.value as typeof priority)}
             >
-              <MenuItem value="">None</MenuItem>
+              <MenuItem value=""><em>Not Set</em></MenuItem>
               <MenuItem value="low">🟢 Low</MenuItem>
               <MenuItem value="medium">🟡 Medium</MenuItem>
               <MenuItem value="high">🔴 High</MenuItem>

@@ -2,6 +2,7 @@ import { Button, Typography, Stack, Chip, Box } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Task } from '@/types';
+import { useDevice } from '@/contexts/DeviceContext';
 
 interface TaskHeaderProps {
   task: Task;
@@ -9,16 +10,20 @@ interface TaskHeaderProps {
 
 export default function TaskHeader({ task }: TaskHeaderProps) {
   const router = useRouter();
+  const { isAndroid, isIOS } = useDevice();
+  const showBackButton = isAndroid || isIOS;
 
   return (
     <>
-      <Button 
-        startIcon={<ArrowBackIcon />} 
-        onClick={() => router.back()} 
-        sx={{ mb: 2 }}
-      >
-        Back to Tasks
-      </Button>
+      {showBackButton && (
+        <Button 
+          startIcon={<ArrowBackIcon />} 
+          onClick={() => router.back()} 
+          sx={{ mb: 2 }}
+        >
+          Back to Tasks
+        </Button>
+      )}
       
       <Typography 
         variant="h4" 

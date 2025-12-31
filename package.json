@@ -20,13 +20,15 @@
     "langchain": "^1.2.3",
     "next": "16.1.1",
     "react": "19.2.3",
+    "react-device-detect": "^2.2.3",
     "react-dom": "19.2.3",
     "zod": "^4.2.1",
     "zustand": "^5.0.9"
   },
   "devDependencies": {
+    "@playwright/test": "^1.57.0",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/node": "^20.19.27",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",

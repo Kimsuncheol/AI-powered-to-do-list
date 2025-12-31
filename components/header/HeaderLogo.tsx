@@ -22,7 +22,7 @@ export default function HeaderLogo() {
         src="/header-logo.png"
         alt="AI To-Do Logo"
         fill
-        style={{ objectFit: 'contain' }}
+        style={{ objectFit: 'cover' }}
         priority
       />
     </Box>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import ThemeRegistry from "@/components/ThemeRegistry/ThemeRegistry";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { BillingProvider } from "@/contexts/BillingContext";
+import { DeviceProvider } from "@/contexts/DeviceContext";
 import Header from "@/components/Header";
 import AuthModals from "@/components/auth/AuthModals";
 import "./globals.css";
@@ -22,9 +23,11 @@ export default function RootLayout({
         <ThemeRegistry>
           <AuthProvider>
             <BillingProvider>
-              <Header />
-              {children}
-              <AuthModals />
+              <DeviceProvider>
+                <Header />
+                {children}
+                <AuthModals />
+              </DeviceProvider>
             </BillingProvider>
           </AuthProvider>
         </ThemeRegistry>

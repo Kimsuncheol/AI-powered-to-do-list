@@ -21,10 +21,18 @@ export const taskService = {
   // Add a new task
   addTask: async (task: CreateTaskInput, userId: string): Promise<string> => {
     try {
+      // Firebase doesn't like undefined values. Remove them or convert to null.
+      const sanitizedTask = Object.entries(task).reduce((acc, [key, value]) => {
+        if (value !== undefined) {
+          acc[key] = value;
+        }
+        return acc;
+      }, {} as Record<string, any>);
+
       const docRef = await addDoc(collection(db, COLLECTION_NAME), {
-        ...task,
+        ...sanitizedTask,
         userId,
-        completed: false,
+        completed: task.completed ?? false,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
       });
