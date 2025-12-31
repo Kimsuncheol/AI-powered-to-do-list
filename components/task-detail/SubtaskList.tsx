@@ -15,7 +15,7 @@ export default function SubtaskList({ subtasks, onToggle }: SubtaskListProps) {
   if (!subtasks || subtasks.length === 0) return null;
 
   return (
-    <Box sx={{ mt: 4 }}>
+    <Box sx={{ mt: 4, maxWidth: '100%' }}>
       <Typography variant="h6" sx={{ mb: 2 }}>Subtasks</Typography>
       <Paper variant="outlined" sx={{ p: 1 }}>
         {subtasks.map(sub => (

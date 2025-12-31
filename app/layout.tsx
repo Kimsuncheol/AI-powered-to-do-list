@@ -6,6 +6,7 @@ import { DeviceProvider } from "@/contexts/DeviceContext";
 import Header from "@/components/Header";
 import AuthModals from "@/components/auth/AuthModals";
 import "./globals.css";
+import { Container } from "@mui/material";
 
 export const metadata: Metadata = {
   title: "AI Powered To-Do List",
@@ -25,7 +26,9 @@ export default function RootLayout({
             <BillingProvider>
               <DeviceProvider>
                 <Header />
-                {children}
+                <Container maxWidth="lg">
+                  {children}
+                </Container>
                 <AuthModals />
               </DeviceProvider>
             </BillingProvider>

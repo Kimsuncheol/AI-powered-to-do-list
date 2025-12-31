@@ -141,7 +141,7 @@ export default function TaskList() {
   }
 
   return (
-    <Container maxWidth="md" sx={{ mt: 4 }}>
+    <Container maxWidth="lg" sx={{ mt: 4 }}>
       <Typography
         variant="h4"
         component="h1"
@@ -154,7 +154,7 @@ export default function TaskList() {
 
       <TaskInput onAdd={handleAddTask} onTasksChanged={loadTasks} />
 
-      <Box>
+      <Box sx={{ maxWidth: 'lg', mx: 'auto' }}>
         {tasks.map((task) => (
           <TaskItem
             key={task.id}

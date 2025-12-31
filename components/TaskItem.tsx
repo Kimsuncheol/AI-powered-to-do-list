@@ -22,7 +22,7 @@ interface TaskItemProps {
 
 export default function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
   return (
-    <Card variant="outlined" sx={{ mb: 2 }}>
+    <Card variant="outlined" sx={{ mb: 2, maxWidth: 'lg', mx: 'auto' }}>
       <CardContent sx={{ display: 'flex', alignItems: 'flex-start', p: 2 }}>
         <Checkbox 
           checked={task.completed} 

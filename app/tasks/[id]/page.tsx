@@ -90,7 +90,7 @@ export default function TaskDetailsPage() {
   }
 
   return (
-    <Container maxWidth="md" sx={{ mt: 4 }}>
+    <Container sx={{ mt: 4 }}>
       <TaskHeader task={task} />
       
       <Paper elevation={0} variant="outlined" sx={{ p: 4, borderRadius: 2 }}>

@@ -10,6 +10,8 @@ import {
   Box,
   IconButton,
   Divider,
+  Checkbox,
+  FormControlLabel,
 } from '@mui/material';
 import { Close as CloseIcon, Google as GoogleIcon } from '@mui/icons-material';
 import { useAuth } from '@/contexts/AuthContext';
@@ -30,14 +32,28 @@ export default function SignInModal({
   const { signInWithEmail, signInWithGoogle } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
+  React.useEffect(() => {
+    const savedEmail = localStorage.getItem('rememberedEmail');
+    if (savedEmail) {
+      setEmail(savedEmail);
+      setRememberMe(true);
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setLoading(true);
     try {
+      if (rememberMe) {
+        localStorage.setItem('rememberedEmail', email);
+      } else {
+        localStorage.removeItem('rememberedEmail');
+      }
       await signInWithEmail(email, password);
       onClose();
     } catch (err: unknown) {
@@ -95,6 +111,17 @@ export default function SignInModal({
             autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+                color="primary"
+              />
+            }
+            label="Remember me"
+            sx={{ mb: 1 }}
           />
           <Button
             type="submit"
