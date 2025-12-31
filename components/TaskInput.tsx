@@ -4,7 +4,6 @@ import {
   Paper, 
   InputBase, 
   IconButton, 
-  Divider,
   Box,
   CircularProgress,
   Typography,
@@ -139,28 +138,61 @@ export default function TaskInput({ onAdd, onTasksChanged, disabled }: TaskInput
 
   return (
     <Box sx={{ mb: 3 }}>
-      {/* Search/Input Bar */}
+      {/* Reddit-style Search Bar */}
       <Paper
         component="div"
+        elevation={0}
         sx={{ 
-          p: '2px 4px', 
           display: 'flex', 
-          alignItems: 'center', 
-          transition: 'all 0.3s ease',
-          boxShadow: mode === 'agent' 
-            ? '0 0 0 2px #764ba2, 0 4px 6px -1px rgba(0, 0, 0, 0.1)' 
-            : 1,
-          border: mode === 'agent' ? '1px solid transparent' : '1px solid transparent'
+          alignItems: 'center',
+          borderRadius: '99px', // Pill-shaped like Reddit
+          bgcolor: mode === 'agent' 
+            ? 'rgba(118, 75, 162, 0.08)' 
+            : (theme) => theme.palette.mode === 'dark' ? '#272729' : '#f3f4f5',
+          border: mode === 'agent' 
+            ? '2px solid #764ba2' 
+            : '1px solid transparent',
+          padding: '6px 12px',
+          transition: 'all 0.2s ease',
+          '&:hover': {
+            bgcolor: mode === 'agent' 
+              ? 'rgba(118, 75, 162, 0.12)' 
+              : (theme) => theme.palette.mode === 'dark' ? '#2d2d2f' : '#edeff1',
+          },
+          '&:focus-within': {
+            bgcolor: mode === 'agent' 
+              ? 'rgba(118, 75, 162, 0.15)' 
+              : (theme) => theme.palette.mode === 'dark' ? '#1a1a1b' : '#ffffff',
+            border: mode === 'agent' 
+              ? '2px solid #764ba2' 
+              : (theme) => `1px solid ${theme.palette.divider}`,
+          }
         }}
       >
-        {mode === 'agent' && (
-          <IconButton sx={{ p: '10px', color: '#764ba2' }} aria-label="agent-icon">
-            <AgentIcon />
-          </IconButton>
-        )}
+        {/* Left Icon - Search or Agent */}
+        <IconButton 
+          sx={{ 
+            p: '8px',
+            color: mode === 'agent' ? '#764ba2' : 'text.secondary',
+            '&:hover': { bgcolor: 'transparent' }
+          }} 
+          aria-label={mode === 'agent' ? 'agent-icon' : 'search-icon'}
+          disableRipple
+        >
+          {mode === 'agent' ? <AgentIcon /> : <AddIcon />}
+        </IconButton>
 
+        {/* Input Field */}
         <InputBase
-          sx={{ ml: 1, flex: 1 }}
+          sx={{ 
+            ml: 0.5, 
+            flex: 1,
+            fontSize: '0.95rem',
+            '& input::placeholder': {
+              color: 'text.secondary',
+              opacity: 0.7,
+            }
+          }}
           placeholder={mode === 'agent' ? "Ask the AI assistant..." : "Add a new task..."}
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -174,44 +206,62 @@ export default function TaskInput({ onAdd, onTasksChanged, disabled }: TaskInput
           autoFocus
         />
         
+        {/* Right Side Actions */}
         {isSubmitting || agentLoading ? (
-           <CircularProgress size={24} sx={{ mx: 2, color: mode === 'agent' ? '#764ba2' : undefined }} />
+           <CircularProgress 
+             size={20} 
+             sx={{ 
+               mx: 1, 
+               color: mode === 'agent' ? '#764ba2' : 'text.secondary' 
+             }} 
+           />
         ) : (
           <>
-            {mode === 'task' ? (
-              <IconButton 
-                 color="primary" 
-                 sx={{ p: '10px' }} 
-                 onClick={() => handleSubmit(false)}
-                 disabled={!input.trim()}
-              >
-                <AddIcon />
-              </IconButton>
-            ) : (
-              <IconButton 
-                sx={{ p: '10px', color: '#764ba2' }} 
-                onClick={handleAgentSend}
-                disabled={!input.trim()}
-              >
-                <SendIcon />
-              </IconButton>
+            {/* Submit Button */}
+            {input.trim() && (
+              mode === 'task' ? (
+                <IconButton 
+                  size="small"
+                  sx={{ 
+                    p: '6px',
+                    color: 'primary.main',
+                    '&:hover': { bgcolor: 'rgba(0, 0, 0, 0.04)' }
+                  }} 
+                  onClick={() => handleSubmit(false)}
+                >
+                  <AddIcon fontSize="small" />
+                </IconButton>
+              ) : (
+                <IconButton 
+                  size="small"
+                  sx={{ 
+                    p: '6px',
+                    color: '#764ba2',
+                    '&:hover': { bgcolor: 'rgba(118, 75, 162, 0.08)' }
+                  }} 
+                  onClick={handleAgentSend}
+                >
+                  <SendIcon fontSize="small" />
+                </IconButton>
+              )
             )}
 
-            <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-            
+            {/* Mode Toggle */}
             <IconButton 
+              size="small"
               sx={{ 
-                p: '10px',
-                color: mode === 'agent' ? '#764ba2' : 'action.active',
-                bgcolor: mode === 'agent' ? 'rgba(118, 75, 162, 0.08)' : 'transparent',
+                p: '6px',
+                ml: 0.5,
+                color: mode === 'agent' ? '#764ba2' : 'text.secondary',
+                bgcolor: mode === 'agent' ? 'rgba(118, 75, 162, 0.12)' : 'transparent',
                 '&:hover': {
-                  bgcolor: mode === 'agent' ? 'rgba(118, 75, 162, 0.15)' : 'rgba(0, 0, 0, 0.04)',
+                  bgcolor: mode === 'agent' ? 'rgba(118, 75, 162, 0.2)' : 'rgba(0, 0, 0, 0.04)',
                 }
               }} 
               onClick={handleModeSwitch}
               title={mode === 'task' ? "Switch to AI Agent" : "Switch to Task Input"}
             >
-              {mode === 'task' ? <AutoAwesomeIcon /> : <CloseIcon />}
+              {mode === 'task' ? <AutoAwesomeIcon fontSize="small" /> : <CloseIcon fontSize="small" />}
             </IconButton>
           </>
         )}
