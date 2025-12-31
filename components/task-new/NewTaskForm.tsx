@@ -13,6 +13,10 @@ import {
   Typography,
 } from '@mui/material';
 import { Save as SaveIcon, Add as AddIcon } from '@mui/icons-material';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { taskService } from '@/services/taskService';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
@@ -25,7 +29,7 @@ export default function NewTaskForm({ onSaved }: NewTaskFormProps) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState<'low' | 'medium' | 'high' | ''>('');
-  const [dueDate, setDueDate] = useState('');
+  const [dueDate, setDueDate] = useState<Dayjs | null>(null);
   const [tagInput, setTagInput] = useState('');
   const [tags, setTags] = useState<string[]>([]);
   const [saving, setSaving] = useState(false);
@@ -54,7 +58,7 @@ export default function NewTaskForm({ onSaved }: NewTaskFormProps) {
           title: title.trim(),
           description: description.trim() || undefined,
           priority: priority || undefined,
-          dueDate: dueDate ? new Date(dueDate) : undefined,
+          dueDate: dueDate ? dueDate.toDate() : undefined,
           tags: tags.length > 0 ? tags : undefined,
           completed: false,
         },
@@ -144,16 +148,20 @@ export default function NewTaskForm({ onSaved }: NewTaskFormProps) {
             </Select>
           </FormControl>
 
-          {/* Due Date */}
-          <TextField
-            type="date"
-            size="small"
-            label="Due Date"
-            value={dueDate}
-            onChange={(e) => setDueDate(e.target.value)}
-            InputLabelProps={{ shrink: true }}
-            sx={{ maxWidth: 200 }}
-          />
+          {/* Due Date - Enhanced with DatePicker */}
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              label="Due Date"
+              value={dueDate}
+              onChange={(newValue) => setDueDate(newValue)}
+              slotProps={{
+                textField: {
+                  size: 'small',
+                  sx: { maxWidth: 250 },
+                },
+              }}
+            />
+          </LocalizationProvider>
 
           {/* Tags */}
           <Box>

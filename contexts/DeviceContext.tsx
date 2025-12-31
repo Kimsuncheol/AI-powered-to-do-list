@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { isAndroid, isIOS, isMobile, isTablet, isDesktop } from 'react-device-detect';
+import { isAndroid, isIOS, isMobile, isTablet, isDesktop, isMacOs, isWindows } from 'react-device-detect';
 
 interface DeviceContextType {
   isMobile: boolean;
@@ -9,6 +9,8 @@ interface DeviceContextType {
   isDesktop: boolean;
   isAndroid: boolean;
   isIOS: boolean;
+  isMacOs: boolean;
+  isWindows: boolean;
 }
 
 const DeviceContext = createContext<DeviceContextType>({
@@ -17,6 +19,8 @@ const DeviceContext = createContext<DeviceContextType>({
   isDesktop: true,
   isAndroid: false,
   isIOS: false,
+  isMacOs: false,
+  isWindows: false,
 });
 
 export const useDevice = () => useContext(DeviceContext);
@@ -28,6 +32,8 @@ export function DeviceProvider({ children }: { children: React.ReactNode }) {
     isDesktop: true, // Default to desktop for SSR/initial render
     isAndroid: false,
     isIOS: false,
+    isMacOs: false,
+    isWindows: false,
   });
 
   useEffect(() => {
@@ -39,6 +45,8 @@ export function DeviceProvider({ children }: { children: React.ReactNode }) {
       isDesktop,
       isAndroid,
       isIOS,
+      isMacOs,
+      isWindows,
     });
   }, []);
 

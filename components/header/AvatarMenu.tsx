@@ -8,6 +8,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import PaymentIcon from '@mui/icons-material/Payment';
 import LogoutIcon from '@mui/icons-material/Logout';
 import InsightsIcon from '@mui/icons-material/Insights';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 export default function AvatarMenu() {
   const { user, logout } = useAuth();
@@ -24,9 +25,10 @@ export default function AvatarMenu() {
 
   const menuItems = [
     { label: 'Profile', icon: <PersonIcon fontSize="small" />, path: '/profile' },
+    { label: 'Calendar', icon: <CalendarMonthIcon fontSize="small" />, path: '/calendar' },
+    { label: 'Insight', icon: <InsightsIcon fontSize="small" />, path: '/insight' },
     { label: 'Billing', icon: <PaymentIcon fontSize="small" />, path: '/billing' },
     { label: 'Settings', icon: <SettingsIcon fontSize="small" />, path: '/settings' },
-    { label: 'Insight', icon: <InsightsIcon fontSize="small" />, path: '/insight' },
   ];
 
   return (
