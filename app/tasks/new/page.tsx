@@ -1,6 +1,6 @@
-'use client';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+"use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   Container,
   Box,
@@ -10,14 +10,15 @@ import {
   Tabs,
   Tab,
   Paper,
-} from '@mui/material';
+} from "@mui/material";
 import {
   ArrowBack as ArrowBackIcon,
   Edit as EditIcon,
   AutoAwesome as AIIcon,
-} from '@mui/icons-material';
-import NewTaskForm from '@/components/task-new/NewTaskForm';
-import AITaskCreator from '@/components/task-new/AITaskCreator';
+} from "@mui/icons-material";
+import NewTaskForm from "@/components/task-new/NewTaskForm";
+import AITaskCreator from "@/components/task-new/AITaskCreator";
+import { useDevice } from "@/contexts/DeviceContext";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -27,11 +28,7 @@ interface TabPanelProps {
 
 function TabPanel({ children, value, index }: TabPanelProps) {
   return (
-    <Box
-      role="tabpanel"
-      hidden={value !== index}
-      sx={{ pt: 3 }}
-    >
+    <Box role="tabpanel" hidden={value !== index} sx={{ pt: 3 }}>
       {value === index && children}
     </Box>
   );
@@ -41,6 +38,7 @@ export default function NewTaskPage() {
   const router = useRouter();
   const [tabValue, setTabValue] = useState(0);
   const [taskCreated, setTaskCreated] = useState(false);
+  const isMobile = useDevice();
 
   const handleTaskCreated = () => {
     setTaskCreated(true);
@@ -48,27 +46,27 @@ export default function NewTaskPage() {
 
   return (
     <Container maxWidth="md" sx={{ mt: 4, mb: 8 }}>
-      {/* Back button */}
-      <Button
-        startIcon={<ArrowBackIcon />}
-        onClick={() => router.back()}
-        sx={{
-          mb: 4,
-          color: 'text.secondary',
-          '&:hover': { bgcolor: 'action.hover' },
-        }}
-      >
-        Back
-      </Button>
-
+      {isMobile && (
+        <Button
+          startIcon={<ArrowBackIcon />}
+          onClick={() => router.back()}
+          sx={{
+            mb: 4,
+            color: "text.secondary",
+            "&:hover": { bgcolor: "action.hover" },
+          }}
+        >
+          Back
+        </Button>
+      )}
       {/* Page Header - Notion style */}
       <Box sx={{ mb: 4 }}>
         <Typography
           variant="overline"
           sx={{
-            color: 'text.secondary',
+            color: "text.secondary",
             letterSpacing: 2,
-            fontSize: '0.75rem',
+            fontSize: "0.75rem",
           }}
         >
           New Task
@@ -80,8 +78,8 @@ export default function NewTaskPage() {
         elevation={0}
         sx={{
           borderBottom: 1,
-          borderColor: 'divider',
-          bgcolor: 'transparent',
+          borderColor: "divider",
+          bgcolor: "transparent",
           mb: 2,
         }}
       >
@@ -89,10 +87,10 @@ export default function NewTaskPage() {
           value={tabValue}
           onChange={(_, newValue) => setTabValue(newValue)}
           sx={{
-            '& .MuiTab-root': {
-              textTransform: 'none',
+            "& .MuiTab-root": {
+              textTransform: "none",
               fontWeight: 500,
-              fontSize: '0.95rem',
+              fontSize: "0.95rem",
               minHeight: 48,
             },
           }}
@@ -107,8 +105,8 @@ export default function NewTaskPage() {
             iconPosition="start"
             label="AI Assistant"
             sx={{
-              '&.Mui-selected': {
-                color: '#764ba2',
+              "&.Mui-selected": {
+                color: "#764ba2",
               },
             }}
           />
@@ -127,7 +125,8 @@ export default function NewTaskPage() {
             Create with AI
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Describe what you need to do and the AI will create a structured task for you.
+            Describe what you need to do and the AI will create a structured
+            task for you.
           </Typography>
         </Box>
 
@@ -139,17 +138,17 @@ export default function NewTaskPage() {
               mt: 3,
               p: 2,
               borderRadius: 2,
-              bgcolor: 'success.light',
-              border: '1px solid',
-              borderColor: 'success.main',
+              bgcolor: "success.light",
+              border: "1px solid",
+              borderColor: "success.main",
             }}
           >
             <Typography variant="body2" color="success.dark">
-              ✅ Task created successfully!{' '}
+              ✅ Task created successfully!{" "}
               <Button
                 size="small"
-                onClick={() => router.push('/')}
-                sx={{ ml: 1, textTransform: 'none' }}
+                onClick={() => router.push("/")}
+                sx={{ ml: 1, textTransform: "none" }}
               >
                 View Tasks
               </Button>

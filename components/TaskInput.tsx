@@ -137,7 +137,7 @@ export default function TaskInput({ onAdd, onTasksChanged, disabled }: TaskInput
   };
 
   return (
-    <Box sx={{ mb: 3 }}>
+    <Box sx={{ mb: 3, width: '100%', maxWidth: 960, mx: 'auto' }}>
       {/* Reddit-style Search Bar */}
       <Paper
         component="div"
