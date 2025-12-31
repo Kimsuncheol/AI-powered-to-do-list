@@ -40,8 +40,8 @@ export default function SignInModal({
     try {
       await signInWithEmail(email, password);
       onClose();
-    } catch (err: any) {
-      setError(err.message || 'Failed to sign in');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Failed to sign in');
     } finally {
       setLoading(false);
     }
@@ -52,8 +52,8 @@ export default function SignInModal({
     try {
       await signInWithGoogle();
       onClose();
-    } catch (err: any) {
-      setError(err.message || 'Failed to sign in with Google');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Failed to sign in with Google');
     }
   };
 
