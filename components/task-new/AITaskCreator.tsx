@@ -7,18 +7,17 @@ import {
   Typography,
   Paper,
   CircularProgress,
-  Collapse,
   Avatar,
-  Chip,
 } from '@mui/material';
 import {
   AutoAwesome as AIIcon,
   Send as SendIcon,
-  SmartToy as AgentIcon,
 } from '@mui/icons-material';
 import { runAgentAction, AgentMessage } from '@/actions/agentActions';
 import { useAuth } from '@/contexts/AuthContext';
 import { useBilling } from '@/contexts/BillingContext';
+import SuggestionChips from './SuggestionChips';
+import ChatHistory from './ChatHistory';
 
 interface AITaskCreatorProps {
   onTaskCreated?: () => void;
@@ -125,11 +124,31 @@ export default function AITaskCreator({ onTaskCreated }: AITaskCreatorProps) {
         </Box>
       </Box>
 
-      {/* Input */}
-      <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
+      {/* Reddit-style Input */}
+      <Paper
+        elevation={0}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          borderRadius: '99px',
+          bgcolor: (theme) => theme.palette.mode === 'dark' ? '#272729' : '#f3f4f5',
+          border: '1px solid transparent',
+          padding: '8px 14px',
+          mb: 2,
+          transition: 'all 0.2s ease',
+          '&:hover': {
+            bgcolor: (theme) => theme.palette.mode === 'dark' ? '#2d2d2f' : '#edeff1',
+          },
+          '&:focus-within': {
+            bgcolor: (theme) => theme.palette.mode === 'dark' ? '#1a1a1b' : '#ffffff',
+            border: (theme) => `1px solid ${theme.palette.divider}`,
+          }
+        }}
+      >
+        <AIIcon sx={{ color: 'text.secondary', fontSize: 20, mr: 1 }} />
         <TextField
           fullWidth
-          size="small"
+          variant="standard"
           placeholder="e.g., Add a task to call mom tomorrow at 5pm, high priority"
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -140,97 +159,45 @@ export default function AITaskCreator({ onTaskCreated }: AITaskCreatorProps) {
             }
           }}
           disabled={loading}
-          sx={{
-            '& .MuiOutlinedInput-root': {
-              borderRadius: 2,
-              bgcolor: 'background.paper',
-            },
+          InputProps={{
+            disableUnderline: true,
+            sx: {
+              fontSize: '0.95rem',
+              '& input::placeholder': {
+                color: 'text.secondary',
+                opacity: 0.7,
+              }
+            }
           }}
         />
-        <IconButton
-          onClick={handleSend}
-          disabled={!input.trim() || loading}
-          sx={{
-            bgcolor: 'primary.main',
-            color: 'white',
-            '&:hover': { bgcolor: 'primary.dark' },
-            '&:disabled': { bgcolor: 'grey.300' },
-          }}
-        >
-          {loading ? <CircularProgress size={20} color="inherit" /> : <SendIcon />}
-        </IconButton>
-      </Box>
+        {loading ? (
+          <CircularProgress size={20} sx={{ ml: 1, color: 'text.secondary' }} />
+        ) : (
+          input.trim() && (
+            <IconButton
+              size="small"
+              onClick={handleSend}
+              sx={{
+                ml: 1,
+                p: '6px',
+                bgcolor: 'primary.main',
+                color: 'white',
+                '&:hover': { bgcolor: 'primary.dark' },
+              }}
+            >
+              <SendIcon fontSize="small" />
+            </IconButton>
+          )
+        )}
+      </Paper>
 
       {/* Quick suggestions */}
       {messages.length === 0 && (
-        <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-          {suggestions.map((suggestion) => (
-            <Chip
-              key={suggestion}
-              label={suggestion}
-              size="small"
-              variant="outlined"
-              onClick={() => setInput(suggestion)}
-              sx={{ cursor: 'pointer' }}
-            />
-          ))}
-        </Box>
+        <SuggestionChips suggestions={suggestions} onSelect={setInput} />
       )}
 
       {/* Chat history */}
-      <Collapse in={expanded && messages.length > 0}>
-        <Box
-          sx={{
-            mt: 2,
-            pt: 2,
-            borderTop: '1px solid',
-            borderColor: 'divider',
-            maxHeight: 200,
-            overflow: 'auto',
-          }}
-        >
-          {messages.map((msg, index) => (
-            <Box
-              key={index}
-              sx={{
-                display: 'flex',
-                justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start',
-                mb: 1,
-              }}
-            >
-              {msg.role === 'assistant' && (
-                <Avatar sx={{ width: 24, height: 24, mr: 1, bgcolor: 'primary.main' }}>
-                  <AgentIcon sx={{ fontSize: 14 }} />
-                </Avatar>
-              )}
-              <Paper
-                elevation={0}
-                sx={{
-                  p: 1.5,
-                  maxWidth: '80%',
-                  bgcolor: msg.role === 'user' ? 'primary.main' : 'background.paper',
-                  color: msg.role === 'user' ? 'white' : 'text.primary',
-                  borderRadius: 2,
-                  border: msg.role === 'assistant' ? '1px solid' : 'none',
-                  borderColor: 'divider',
-                }}
-              >
-                <Typography variant="body2" sx={{ whiteSpace: 'pre-wrap' }}>
-                  {msg.content}
-                </Typography>
-              </Paper>
-            </Box>
-          ))}
-          {loading && (
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <Avatar sx={{ width: 24, height: 24, bgcolor: 'primary.main' }}>
-                <AgentIcon sx={{ fontSize: 14 }} />
-              </Avatar>
-              <CircularProgress size={16} />
-            </Box>
-          )}
-        </Box>
-      </Collapse>
+      <ChatHistory messages={messages} loading={loading} expanded={expanded} />
     </Paper>
   );
 }

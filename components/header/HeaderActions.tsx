@@ -1,5 +1,5 @@
 'use client';
-import { Stack, Tooltip, IconButton, Button } from '@mui/material';
+import { Stack, Tooltip, Button } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import AvatarMenu from './AvatarMenu';
@@ -16,18 +16,30 @@ export default function HeaderActions() {
       {user ? (
         <>
           <Tooltip title="Create New Task">
-            <IconButton
-              color="primary"
+            <Button
+              variant="contained"
+              startIcon={<AddCircleIcon />}
               onClick={() => router.push('/tasks/new')}
               sx={{
-                background: 'linear-gradient(135deg, rgba(102,126,234,0.1) 0%, rgba(118,75,162,0.1) 100%)',
+                textTransform: 'none',
+                fontWeight: 600,
+                borderRadius: '99px',
+                px: 2.5,
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                boxShadow: '0 4px 14px 0 rgba(118, 75, 162, 0.39)',
+                transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
                 '&:hover': {
-                  background: 'linear-gradient(135deg, rgba(102,126,234,0.2) 0%, rgba(118,75,162,0.2) 100%)',
+                  background: 'linear-gradient(135deg, #764ba2 0%, #667eea 100%)',
+                  transform: 'translateY(-2px) scale(1.02)',
+                  boxShadow: '0 6px 20px rgba(118, 75, 162, 0.45)',
+                },
+                '&:active': {
+                  transform: 'translateY(0) scale(0.98)',
                 },
               }}
             >
-              <AddCircleIcon />
-            </IconButton>
+              New Task
+            </Button>
           </Tooltip>
           <AvatarMenu />
         </>
