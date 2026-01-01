@@ -1,10 +1,12 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import { Container, Typography, Box, CircularProgress, Paper } from '@mui/material';
+import { Container, Typography, Box, CircularProgress, Paper, Button, Divider, IconButton, Tooltip } from '@mui/material';
+import { ArrowBack as ArrowBackIcon, Delete as DeleteIcon } from '@mui/icons-material';
+import { useRouter } from 'next/navigation';
 import { Task } from '@/types';
 import { taskService } from '@/services/taskService';
-import { useAuth } from '@/contexts/AuthContext';
+
 import { generateSubtasksAction } from '@/actions/aiActions';
 import TaskHeader from '@/components/task-detail/TaskHeader';
 import TaskDescription from '@/components/task-detail/TaskDescription';
@@ -12,8 +14,9 @@ import SubtaskGenerator from '@/components/task-detail/SubtaskGenerator';
 import SubtaskList from '@/components/task-detail/SubtaskList';
 
 export default function TaskDetailsPage() {
+  const router = useRouter();
   const params = useParams();
-  const { user } = useAuth();
+
   const [task, setTask] = useState<Task | null>(null);
   const [loading, setLoading] = useState(true);
   const [generating, setGenerating] = useState(false);
@@ -73,6 +76,14 @@ export default function TaskDetailsPage() {
       await taskService.updateTask(task.id, { subtasks: updatedSubtasks });
   };
 
+  const handleDelete = async () => {
+    if (!task) return;
+    if (confirm('Are you sure you want to delete this task?')) {
+      await taskService.deleteTask(task.id);
+      router.push('/');
+    }
+  };
+
   if (loading) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', mt: 10 }}>
@@ -90,21 +101,53 @@ export default function TaskDetailsPage() {
   }
 
   return (
-    <Container sx={{ mt: 4 }}>
-      <TaskHeader task={task} />
-      
-      <Paper elevation={0} variant="outlined" sx={{ p: 4, borderRadius: 2 }}>
-        <TaskDescription description={task.description} />
-        
-        <SubtaskGenerator 
-          onGenerate={handleGenerateSubtasks}
-          generating={generating}
-        />
+    <Container maxWidth="md" sx={{ mt: 4, mb: 10 }}>
+      <Box sx={{ mb: 3, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <Button 
+          startIcon={<ArrowBackIcon />} 
+          onClick={() => router.push('/')}
+          sx={{ textTransform: 'none', color: 'text.secondary' }}
+        >
+          Back to Tasks
+        </Button>
+        <Tooltip title="Delete Task">
+          <IconButton onClick={handleDelete} color="error" size="small">
+            <DeleteIcon />
+          </IconButton>
+        </Tooltip>
+      </Box>
 
-        <SubtaskList 
-          subtasks={task.subtasks}
-          onToggle={toggleSubtask}
-        />
+      <Paper 
+        elevation={0} 
+        variant="outlined" 
+        sx={{ 
+          p: { xs: 3, md: 5 }, 
+          borderRadius: 3,
+          borderColor: 'divider',
+          bgcolor: 'background.paper',
+          position: 'relative',
+          overflow: 'hidden'
+        }}
+      >
+        <TaskHeader task={task} />
+        
+        <Box sx={{ mt: 4 }}>
+          <TaskDescription description={task.description} />
+        </Box>
+        
+        <Divider sx={{ my: 4 }} />
+        
+        <Box sx={{ maxWidth: 'sm' }}>
+           <SubtaskList 
+            subtasks={task.subtasks}
+            onToggle={toggleSubtask}
+          />
+          
+          <SubtaskGenerator 
+            onGenerate={handleGenerateSubtasks}
+            generating={generating}
+          />
+        </Box>
       </Paper>
     </Container>
   );

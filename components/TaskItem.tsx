@@ -11,6 +11,7 @@ import {
   Stack
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import SubtitlesIcon from '@mui/icons-material/Subtitles';
 import Link from 'next/link';
 import { Task } from '@/types';
 
@@ -73,6 +74,15 @@ export default function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
             {task.tags?.map(tag => (
               <Chip key={tag} label={tag} size="small" variant="outlined" />
             ))}
+            
+            {task.subtasks && task.subtasks.length > 0 && (
+              <Box sx={{ display: 'flex', alignItems: 'center', ml: 'auto !important' }}>
+                <SubtitlesIcon sx={{ fontSize: 14, mr: 0.5, color: 'text.secondary' }} />
+                <Typography variant="caption" color="text.secondary">
+                  {task.subtasks.filter(s => s.completed).length}/{task.subtasks.length}
+                </Typography>
+              </Box>
+            )}
           </Stack>
         </Box>
         <Box>

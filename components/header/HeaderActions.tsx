@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { Stack, Tooltip, Button, IconButton } from '@mui/material';
+import { Stack, Tooltip, Button, IconButton, useTheme } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
@@ -14,6 +14,8 @@ export default function HeaderActions() {
   const { user } = useAuth();
   const { setOpenModal } = useAuthStore();
   const [calendarOpen, setCalendarOpen] = useState(false);
+  const theme = useTheme();
+  const isDarkMode = theme.palette.mode === 'dark';
 
   return (
     <>
@@ -36,7 +38,7 @@ export default function HeaderActions() {
             </Tooltip>
             <Tooltip title="Create New Task">
               <Button
-                variant="contained"
+                variant="outlined"
                 startIcon={<AddCircleIcon />}
                 onClick={() => router.push('/tasks/new')}
                 sx={{
@@ -44,13 +46,16 @@ export default function HeaderActions() {
                   fontWeight: 600,
                   borderRadius: '99px',
                   px: 2.5,
-                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                  boxShadow: '0 4px 14px 0 rgba(118, 75, 162, 0.39)',
+                  bgcolor: 'transparent',
+                  borderWidth: 1.5,
+                  color: theme.palette.primary.contrastText,
+                  borderColor: theme.palette.primary.contrastText,
                   transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
                   '&:hover': {
-                    background: 'linear-gradient(135deg, #764ba2 0%, #667eea 100%)',
+                    bgcolor: theme.palette.primary.main,
+                    borderColor: theme.palette.primary.main,
+                    color: theme.palette.primary.contrastText,
                     transform: 'translateY(-2px) scale(1.02)',
-                    boxShadow: '0 6px 20px rgba(118, 75, 162, 0.45)',
                   },
                   '&:active': {
                     transform: 'translateY(0) scale(0.98)',

@@ -57,8 +57,21 @@ const deleteTaskTool = new DynamicStructuredTool({
   },
 });
 
+// Tool: Decompose a task into subtasks
+const decomposeTaskTool = new DynamicStructuredTool({
+  name: "decompose_task",
+  description: "Break down a complex task into smaller, manageable subtasks. Use this when the user wants to 'break down', 'decompose', 'plan', or 'step out' a task.",
+  schema: z.object({
+    taskTitle: z.string().describe("The title or partial title of the task to decompose"),
+    subtasks: z.array(z.string()).describe("A list of 3-7 subtask titles. If not provided by user, generate them logically based on the task title."),
+  }),
+  func: async ({ taskTitle, subtasks }) => {
+    return JSON.stringify({ action: "decompose_task", taskTitle, subtasks });
+  },
+});
+
 // All tools
-const tools = [listTasksTool, addTaskTool, completeTaskTool, deleteTaskTool];
+const tools = [listTasksTool, addTaskTool, completeTaskTool, deleteTaskTool, decomposeTaskTool];
 
 // Execute tool actions with actual user context
 async function executeToolAction(action: string, params: Record<string, unknown>, userId: string): Promise<string> {
@@ -139,6 +152,31 @@ async function executeToolAction(action: string, params: Record<string, unknown>
       return `🗑️ Deleted task: "${task.title}"`;
     }
     
+    case "decompose_task": {
+      const taskTitle = params.taskTitle as string;
+      const subtaskTitles = params.subtasks as string[];
+      
+      const tasks = await taskService.getTasks(userId);
+      const task = tasks.find(t => 
+        t.title.toLowerCase().includes(taskTitle.toLowerCase())
+      );
+      
+      if (!task) {
+        return `Could not find a task matching "${taskTitle}". Please make sure the task exists first.`;
+      }
+      
+      const subtasks = subtaskTitles.map(title => ({
+        id: Math.random().toString(36).substring(2, 9),
+        title,
+        completed: false
+      }));
+      
+      await taskService.updateTask(task.id, { subtasks });
+      
+      return `✅ Successfully broke down "${task.title}" into ${subtasks.length} subtasks:\n` + 
+        subtasks.map((s, i) => `${i + 1}. ${s.title}`).join("\n");
+    }
+    
     default:
       return "Unknown action";
   }
@@ -161,6 +199,7 @@ When the user asks about their tasks, use the list_tasks tool.
 When the user wants to add a new task, use the add_task tool. Parse natural language dates like "tomorrow", "next week", etc. into proper ISO dates.
 When the user marks something as done or complete, use the complete_task tool.
 When the user wants to delete or remove a task, use the delete_task tool.
+When a task seems complex or the user specifically asks to break it down, use the decompose_task tool to generate logical sub-steps.
 
 Today's date is: ${new Date().toISOString().split('T')[0]}
 
