@@ -1,11 +1,21 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import { Container, Typography, Box, CircularProgress, Paper, Button, Divider, IconButton, Tooltip } from '@mui/material';
-import { ArrowBack as ArrowBackIcon, Delete as DeleteIcon, Edit as EditIcon } from '@mui/icons-material';
+import { Container, Typography, Box, CircularProgress, Paper, Button, Divider, IconButton, Tooltip, Menu, MenuItem, ListItemIcon, ListItemText } from '@mui/material';
+import { ArrowBack as ArrowBackIcon, Delete as DeleteIcon, Edit as EditIcon, Share as ShareIcon } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
 import { Task } from '@/types';
 import { taskService } from '@/services/taskService';
+import { 
+  FacebookShareButton, 
+  TwitterShareButton, 
+  LinkedinShareButton, 
+  WhatsappShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  LinkedinIcon,
+  WhatsappIcon
+} from 'react-share';
 
 import { generateSubtasksAction } from '@/actions/aiActions';
 import TaskHeader from '@/components/task-detail/TaskHeader';
@@ -20,6 +30,10 @@ export default function TaskDetailsPage() {
   const [task, setTask] = useState<Task | null>(null);
   const [loading, setLoading] = useState(true);
   const [generating, setGenerating] = useState(false);
+  
+  // Share Menu State
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const openShare = Boolean(anchorEl);
 
   useEffect(() => {
     if (params.id) {
@@ -84,6 +98,16 @@ export default function TaskDetailsPage() {
     }
   };
 
+  const handleShareClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleShareClose = () => {
+    setAnchorEl(null);
+  };
+  
+  const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
+
   if (loading) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', mt: 10 }}>
@@ -101,7 +125,7 @@ export default function TaskDetailsPage() {
   }
 
   return (
-    <Container maxWidth="md" sx={{ mt: 4, mb: 10 }}>
+    <Container maxWidth="lg" sx={{ mt: 4, mb: 10 }}>
       <Box sx={{ mb: 3, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Button 
           startIcon={<ArrowBackIcon />} 
@@ -111,6 +135,49 @@ export default function TaskDetailsPage() {
           Back to Tasks
         </Button>
         <Box>
+            <Tooltip title="Share Task">
+                <IconButton onClick={handleShareClick} size="small" sx={{ mr: 1 }}>
+                    <ShareIcon />
+                </IconButton>
+            </Tooltip>
+             <Menu
+                anchorEl={anchorEl}
+                open={openShare}
+                onClose={handleShareClose}
+                onClick={handleShareClose}
+                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                PaperProps={{
+                    elevation: 3,
+                    sx: { minWidth: 200, mt: 1.5 }
+                }}
+            >
+                <FacebookShareButton url={shareUrl} style={{ width: '100%' }}>
+                    <MenuItem>
+                        <ListItemIcon><FacebookIcon size={24} round /></ListItemIcon>
+                        <ListItemText primary="Facebook" />
+                    </MenuItem>
+                </FacebookShareButton>
+                <TwitterShareButton url={shareUrl} title={task.title} style={{ width: '100%' }}>
+                    <MenuItem>
+                        <ListItemIcon><TwitterIcon size={24} round /></ListItemIcon>
+                        <ListItemText primary="Twitter" />
+                    </MenuItem>
+                </TwitterShareButton>
+                <LinkedinShareButton url={shareUrl} title={task.title} summary={task.description} style={{ width: '100%' }}>
+                    <MenuItem>
+                        <ListItemIcon><LinkedinIcon size={24} round /></ListItemIcon>
+                        <ListItemText primary="LinkedIn" />
+                    </MenuItem>
+                </LinkedinShareButton>
+                <WhatsappShareButton url={shareUrl} title={task.title} style={{ width: '100%' }}>
+                    <MenuItem>
+                        <ListItemIcon><WhatsappIcon size={24} round /></ListItemIcon>
+                        <ListItemText primary="WhatsApp" />
+                    </MenuItem>
+                </WhatsappShareButton>
+            </Menu>
+
             <Tooltip title="Edit Task">
             <IconButton onClick={() => router.push(`/tasks/${task.id}/edit`)} size="small" sx={{ mr: 1 }}>
                 <EditIcon />

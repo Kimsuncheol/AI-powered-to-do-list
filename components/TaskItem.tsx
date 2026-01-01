@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Card, 
   CardContent, 
@@ -8,12 +8,28 @@ import {
   Checkbox, 
   Chip, 
   Box,
-  Stack
+  Stack,
+  Menu,
+  MenuItem,
+  ListItemIcon,
+  ListItemText,
+  Tooltip
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SubtitlesIcon from '@mui/icons-material/Subtitles';
+import ShareIcon from '@mui/icons-material/Share';
 import Link from 'next/link';
 import { Task } from '@/types';
+import { 
+  FacebookShareButton, 
+  TwitterShareButton, 
+  LinkedinShareButton, 
+  WhatsappShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  LinkedinIcon,
+  WhatsappIcon
+} from 'react-share';
 
 interface TaskItemProps {
   task: Task;
@@ -22,6 +38,21 @@ interface TaskItemProps {
 }
 
 export default function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const openShare = Boolean(anchorEl);
+
+  const handleShareClick = (event: React.MouseEvent<HTMLElement>) => {
+    event.stopPropagation(); // Prevent navigation when clicking share
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleShareClose = (event?: React.MouseEvent<HTMLElement>) => {
+    if (event) event.stopPropagation();
+    setAnchorEl(null);
+  };
+
+  const shareUrl = typeof window !== 'undefined' ? `${window.location.origin}/tasks/${task.id}` : '';
+
   return (
     <Card variant="outlined" sx={{ mb: 2, maxWidth: 'lg', mx: 'auto' }}>
       <CardContent sx={{ display: 'flex', alignItems: 'flex-start', p: 2 }}>
@@ -91,7 +122,50 @@ export default function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
             )}
           </Stack>
         </Box>
-        <Box>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Tooltip title="Share Task">
+                <IconButton aria-label="share" onClick={handleShareClick} size="small" sx={{ mr: 1 }}>
+                    <ShareIcon />
+                </IconButton>
+            </Tooltip>
+             <Menu
+                anchorEl={anchorEl}
+                open={openShare}
+                onClose={() => handleShareClose()}
+                onClick={(e) => e.stopPropagation()} 
+                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                PaperProps={{
+                    elevation: 3,
+                    sx: { minWidth: 200, mt: 1.5 }
+                }}
+            >
+                <FacebookShareButton url={shareUrl} style={{ width: '100%' }}>
+                    <MenuItem onClick={() => handleShareClose()}>
+                        <ListItemIcon><FacebookIcon size={24} round /></ListItemIcon>
+                        <ListItemText primary="Facebook" />
+                    </MenuItem>
+                </FacebookShareButton>
+                <TwitterShareButton url={shareUrl} title={task.title} style={{ width: '100%' }}>
+                    <MenuItem onClick={() => handleShareClose()}>
+                        <ListItemIcon><TwitterIcon size={24} round /></ListItemIcon>
+                        <ListItemText primary="Twitter" />
+                    </MenuItem>
+                </TwitterShareButton>
+                <LinkedinShareButton url={shareUrl} title={task.title} summary={task.description} style={{ width: '100%' }}>
+                    <MenuItem onClick={() => handleShareClose()}>
+                        <ListItemIcon><LinkedinIcon size={24} round /></ListItemIcon>
+                        <ListItemText primary="LinkedIn" />
+                    </MenuItem>
+                </LinkedinShareButton>
+                <WhatsappShareButton url={shareUrl} title={task.title} style={{ width: '100%' }}>
+                    <MenuItem onClick={() => handleShareClose()}>
+                        <ListItemIcon><WhatsappIcon size={24} round /></ListItemIcon>
+                        <ListItemText primary="WhatsApp" />
+                    </MenuItem>
+                </WhatsappShareButton>
+            </Menu>
+
            <IconButton aria-label="delete" onClick={() => onDelete(task.id)}>
             <DeleteIcon />
           </IconButton>

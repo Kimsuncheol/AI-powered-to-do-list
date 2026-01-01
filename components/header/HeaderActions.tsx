@@ -4,6 +4,7 @@ import { Stack, Tooltip, Button, IconButton, useTheme } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import AvatarMenu from './AvatarMenu';
 import { useAuth } from '@/contexts/AuthContext';
 import { useAuthStore } from '@/store/authStore';
@@ -15,7 +16,6 @@ export default function HeaderActions() {
   const { setOpenModal } = useAuthStore();
   const [calendarOpen, setCalendarOpen] = useState(false);
   const theme = useTheme();
-  const isDarkMode = theme.palette.mode === 'dark';
 
   return (
     <>
@@ -34,6 +34,20 @@ export default function HeaderActions() {
                 }}
               >
                 <CalendarTodayIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Templates">
+              <IconButton
+                onClick={() => router.push('/template')}
+                sx={{
+                  color: 'text.secondary',
+                  '&:hover': {
+                    color: 'primary.main',
+                    bgcolor: 'action.hover',
+                  },
+                }}
+              >
+                <DashboardIcon />
               </IconButton>
             </Tooltip>
             <Tooltip title="Create New Task">
