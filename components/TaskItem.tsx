@@ -9,10 +9,7 @@ import {
   Chip, 
   Box,
   Stack,
-  Menu,
-  MenuItem,
-  ListItemIcon,
-  ListItemText,
+  Stack,
   Tooltip
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -20,16 +17,7 @@ import SubtitlesIcon from '@mui/icons-material/Subtitles';
 import ShareIcon from '@mui/icons-material/Share';
 import Link from 'next/link';
 import { Task } from '@/types';
-import { 
-  FacebookShareButton, 
-  TwitterShareButton, 
-  LinkedinShareButton, 
-  WhatsappShareButton,
-  FacebookIcon,
-  TwitterIcon,
-  LinkedinIcon,
-  WhatsappIcon
-} from 'react-share';
+import ShareMenu from './common/ShareMenu';
 
 interface TaskItemProps {
   task: Task;
@@ -128,43 +116,14 @@ export default function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
                     <ShareIcon />
                 </IconButton>
             </Tooltip>
-             <Menu
+             <ShareMenu 
                 anchorEl={anchorEl}
                 open={openShare}
                 onClose={() => handleShareClose()}
-                onClick={(e) => e.stopPropagation()} 
-                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                PaperProps={{
-                    elevation: 3,
-                    sx: { minWidth: 200, mt: 1.5 }
-                }}
-            >
-                <FacebookShareButton url={shareUrl} style={{ width: '100%' }}>
-                    <MenuItem onClick={() => handleShareClose()}>
-                        <ListItemIcon><FacebookIcon size={24} round /></ListItemIcon>
-                        <ListItemText primary="Facebook" />
-                    </MenuItem>
-                </FacebookShareButton>
-                <TwitterShareButton url={shareUrl} title={task.title} style={{ width: '100%' }}>
-                    <MenuItem onClick={() => handleShareClose()}>
-                        <ListItemIcon><TwitterIcon size={24} round /></ListItemIcon>
-                        <ListItemText primary="Twitter" />
-                    </MenuItem>
-                </TwitterShareButton>
-                <LinkedinShareButton url={shareUrl} title={task.title} summary={task.description} style={{ width: '100%' }}>
-                    <MenuItem onClick={() => handleShareClose()}>
-                        <ListItemIcon><LinkedinIcon size={24} round /></ListItemIcon>
-                        <ListItemText primary="LinkedIn" />
-                    </MenuItem>
-                </LinkedinShareButton>
-                <WhatsappShareButton url={shareUrl} title={task.title} style={{ width: '100%' }}>
-                    <MenuItem onClick={() => handleShareClose()}>
-                        <ListItemIcon><WhatsappIcon size={24} round /></ListItemIcon>
-                        <ListItemText primary="WhatsApp" />
-                    </MenuItem>
-                </WhatsappShareButton>
-            </Menu>
+                shareUrl={shareUrl}
+                title={task.title}
+                description={task.description}
+            />
 
            <IconButton aria-label="delete" onClick={() => onDelete(task.id)}>
             <DeleteIcon />
