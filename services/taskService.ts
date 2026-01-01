@@ -27,7 +27,7 @@ export const taskService = {
           acc[key] = value;
         }
         return acc;
-      }, {} as Record<string, any>);
+      }, {} as Record<string, unknown>);
 
       const docRef = await addDoc(collection(db, COLLECTION_NAME), {
         ...sanitizedTask,
@@ -62,6 +62,7 @@ export const taskService = {
           createdAt: (data.createdAt as Timestamp)?.toDate(),
           updatedAt: (data.updatedAt as Timestamp)?.toDate(),
           dueDate: (data.dueDate as Timestamp)?.toDate() || null,
+          startDate: (data.startDate as Timestamp)?.toDate() || null,
         } as Task;
       });
     } catch (error) {
@@ -84,6 +85,7 @@ export const taskService = {
           createdAt: (data.createdAt as Timestamp)?.toDate(),
           updatedAt: (data.updatedAt as Timestamp)?.toDate(),
           dueDate: (data.dueDate as Timestamp)?.toDate() || null,
+          startDate: (data.startDate as Timestamp)?.toDate() || null,
         } as Task;
       } else {
         return null;

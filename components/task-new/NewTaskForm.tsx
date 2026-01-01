@@ -1,5 +1,4 @@
-'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   TextField,
@@ -11,30 +10,54 @@ import {
   InputLabel,
   FormControl,
   Typography,
+  Alert,
 } from '@mui/material';
 import { Save as SaveIcon, Add as AddIcon } from '@mui/icons-material';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DateRangeCalendar } from '@mui/x-date-pickers-pro/DateRangeCalendar';
+import { DateRange } from '@mui/x-date-pickers-pro/models';
 import dayjs, { Dayjs } from 'dayjs';
 import { taskService } from '@/services/taskService';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
+import { Task } from '@/types';
 
 interface NewTaskFormProps {
   onSaved?: () => void;
+  initialTask?: Task;
 }
 
-export default function NewTaskForm({ onSaved }: NewTaskFormProps) {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [priority, setPriority] = useState<'low' | 'medium' | 'high' | ''>('');
-  const [dueDate, setDueDate] = useState<Dayjs | null>(null);
+export default function NewTaskForm({ onSaved, initialTask }: NewTaskFormProps) {
+  const [title, setTitle] = useState(initialTask?.title || '');
+  const [description, setDescription] = useState(initialTask?.description || '');
+  const [priority, setPriority] = useState<'low' | 'medium' | 'high' | ''>(initialTask?.priority || '');
+  // Date Range State
+  const [dateRange, setDateRange] = useState<DateRange<Dayjs>>([
+    initialTask?.startDate ? dayjs(initialTask.startDate) : null,
+    initialTask?.dueDate ? dayjs(initialTask.dueDate) : null,
+  ]);
+  
   const [tagInput, setTagInput] = useState('');
-  const [tags, setTags] = useState<string[]>([]);
+  const [tags, setTags] = useState<string[]>(initialTask?.tags || []);
   const [saving, setSaving] = useState(false);
+  const [error, setError] = useState('');
+  
   const { user } = useAuth();
   const router = useRouter();
+
+  useEffect(() => {
+    if (initialTask) {
+      setTitle(initialTask.title);
+      setDescription(initialTask.description || '');
+      setPriority(initialTask.priority || '');
+      setDateRange([
+        initialTask.startDate ? dayjs(initialTask.startDate) : null,
+        initialTask.dueDate ? dayjs(initialTask.dueDate) : null,
+      ]);
+      setTags(initialTask.tags || []);
+    }
+  }, [initialTask]);
 
   const handleAddTag = () => {
     if (tagInput.trim() && !tags.includes(tagInput.trim())) {
@@ -49,25 +72,60 @@ export default function NewTaskForm({ onSaved }: NewTaskFormProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title.trim() || !user) return;
+    if (!user) return;
+    setError('');
+
+    // Validation: All fields must be filled
+    if (!title.trim()) {
+      setError('Title is required.');
+      return;
+    }
+    if (!description.trim()) {
+      setError('Description is required.');
+      return;
+    }
+    if (!priority) {
+      setError('Priority is required.');
+      return;
+    }
+    const [start, end] = dateRange;
+    if (!start || !end) {
+      setError('Please select both a start date and a due date.');
+      return;
+    }
 
     setSaving(true);
     try {
-      await taskService.addTask(
-        {
-          title: title.trim(),
-          description: description.trim() || undefined,
-          priority: priority || undefined,
-          dueDate: dueDate ? dueDate.toDate() : undefined,
-          tags: tags.length > 0 ? tags : undefined,
-          completed: false,
-        },
-        user.uid
-      );
+      const taskData = {
+        title: title.trim(),
+        description: description.trim(),
+        priority: priority,
+        startDate: start.toDate(),
+        dueDate: end.toDate(),
+        tags: tags.length > 0 ? tags : undefined,
+      };
+
+      if (initialTask) {
+        await taskService.updateTask(initialTask.id, taskData);
+      } else {
+        await taskService.addTask(
+          {
+            ...taskData,
+            completed: false,
+          },
+          user.uid
+        );
+      }
       onSaved?.();
-      router.push('/');
+      
+      if (initialTask) {
+        router.back(); 
+      } else {
+        router.push('/');
+      }
     } catch (error) {
-      console.error('Failed to create task:', error);
+      console.error('Failed to save task:', error);
+      setError('Failed to save task. Please try again.');
     } finally {
       setSaving(false);
     }
@@ -75,7 +133,13 @@ export default function NewTaskForm({ onSaved }: NewTaskFormProps) {
 
   return (
     <Box component="form" onSubmit={handleSubmit}>
-      {/* Title - Notion style large input */}
+      {error && (
+        <Alert severity="error" sx={{ mb: 2 }}>
+          {error}
+        </Alert>
+      )}
+
+      {/* Title */}
       <TextField
         fullWidth
         placeholder="Untitled"
@@ -97,12 +161,12 @@ export default function NewTaskForm({ onSaved }: NewTaskFormProps) {
         sx={{ mb: 2 }}
       />
 
-      {/* Description - Notion style */}
+      {/* Description */}
       <TextField
         fullWidth
         multiline
         minRows={3}
-        placeholder="Add a description..."
+        placeholder="Add a description... (Required)"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         variant="standard"
@@ -132,36 +196,34 @@ export default function NewTaskForm({ onSaved }: NewTaskFormProps) {
           Properties
         </Typography>
 
-        <Stack spacing={2}>
+        <Stack spacing={3}>
           {/* Priority */}
-          <FormControl size="small" sx={{ minWidth: 150 }}>
+          <FormControl size="small" sx={{ maxWidth: 200 }} required>
             <InputLabel>Priority</InputLabel>
             <Select
               value={priority}
               label="Priority"
               onChange={(e) => setPriority(e.target.value as typeof priority)}
             >
-              <MenuItem value=""><em>Not Set</em></MenuItem>
               <MenuItem value="low">🟢 Low</MenuItem>
               <MenuItem value="medium">🟡 Medium</MenuItem>
               <MenuItem value="high">🔴 High</MenuItem>
             </Select>
           </FormControl>
 
-          {/* Due Date - Enhanced with DatePicker */}
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
-              label="Due Date"
-              value={dueDate}
-              onChange={(newValue) => setDueDate(newValue)}
-              slotProps={{
-                textField: {
-                  size: 'small',
-                  sx: { maxWidth: 250 },
-                },
-              }}
-            />
-          </LocalizationProvider>
+          {/* Date Range Calendar */}
+          <Box>
+            <Typography variant="caption" color="text.secondary" sx={{ mb: 1, display: 'block' }}>
+              Start Date - Due Date *
+            </Typography>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+               <DateRangeCalendar 
+                  value={dateRange} 
+                  onChange={(newValue) => setDateRange(newValue)} 
+                  calendars={1} 
+               />
+            </LocalizationProvider>
+          </Box>
 
           {/* Tags */}
           <Box>
@@ -208,7 +270,7 @@ export default function NewTaskForm({ onSaved }: NewTaskFormProps) {
           type="submit"
           variant="contained"
           size="large"
-          disabled={!title.trim() || saving}
+          disabled={saving}
           startIcon={saving ? undefined : <SaveIcon />}
           sx={{
             px: 4,
@@ -217,7 +279,7 @@ export default function NewTaskForm({ onSaved }: NewTaskFormProps) {
             fontWeight: 600,
           }}
         >
-          {saving ? 'Creating...' : 'Create Task'}
+          {saving ? 'Saving...' : (initialTask ? 'Update Task' : 'Create Task')}
         </Button>
       </Box>
     </Box>

@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { Container, Typography, Box, CircularProgress, Paper, Button, Divider, IconButton, Tooltip } from '@mui/material';
-import { ArrowBack as ArrowBackIcon, Delete as DeleteIcon } from '@mui/icons-material';
+import { ArrowBack as ArrowBackIcon, Delete as DeleteIcon, Edit as EditIcon } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
 import { Task } from '@/types';
 import { taskService } from '@/services/taskService';
@@ -110,11 +110,18 @@ export default function TaskDetailsPage() {
         >
           Back to Tasks
         </Button>
-        <Tooltip title="Delete Task">
-          <IconButton onClick={handleDelete} color="error" size="small">
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
+        <Box>
+            <Tooltip title="Edit Task">
+            <IconButton onClick={() => router.push(`/tasks/${task.id}/edit`)} size="small" sx={{ mr: 1 }}>
+                <EditIcon />
+            </IconButton>
+            </Tooltip>
+            <Tooltip title="Delete Task">
+            <IconButton onClick={handleDelete} color="error" size="small">
+                <DeleteIcon />
+            </IconButton>
+            </Tooltip>
+        </Box>
       </Box>
 
       <Paper 

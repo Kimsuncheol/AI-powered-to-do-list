@@ -27,13 +27,13 @@ export default function ChatMessage({ message }: ChatMessageProps) {
           p: 1.5,
           maxWidth: '80%',
           bgcolor: message.role === 'user' ? 'primary.main' : 'background.paper',
-          color: message.role === 'user' ? 'white' : 'text.primary',
+          color: message.role === 'user' ? 'primary.contrastText' : 'text.primary',
           borderRadius: 2,
           border: message.role === 'assistant' ? '1px solid' : 'none',
           borderColor: 'divider',
         }}
       >
-        <Typography variant="body2" sx={{ whiteSpace: 'pre-wrap' }}>
+        <Typography variant="body2" sx={{ whiteSpace: 'pre-wrap', color: 'inherit' }}>
           {message.content}
         </Typography>
       </Paper>

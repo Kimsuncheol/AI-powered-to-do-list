@@ -19,8 +19,15 @@ export default function ChatHistory({ messages, loading, expanded }: ChatHistory
           pt: 2,
           borderTop: '1px solid',
           borderColor: 'divider',
+          bgcolor: 'transparent',
           maxHeight: 200,
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
           overflow: 'auto',
+          '&::-webkit-scrollbar': {
+            width: 0,
+            height: 0,
+          },
         }}
       >
         {messages.map((msg, index) => (

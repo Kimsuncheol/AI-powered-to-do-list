@@ -1,4 +1,4 @@
-import { Button, Typography, Stack, Chip, Box } from '@mui/material';
+import { Button, Typography, Stack, Chip } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Task } from '@/types';
@@ -40,8 +40,15 @@ export default function TaskHeader({ task }: TaskHeaderProps) {
             color={task.priority === 'high' ? 'error' : task.priority === 'medium' ? 'warning' : 'success'} 
           />
         )}
-        {task.dueDate && (
-          <Chip label={`Due: ${new Date(task.dueDate).toLocaleDateString()}`} variant="outlined" />
+        {(task.startDate || task.dueDate) && (
+          <Chip 
+            label={
+              task.startDate && task.dueDate
+                ? `${new Date(task.startDate).toLocaleDateString()} - ${new Date(task.dueDate).toLocaleDateString()}`
+                : `Due: ${new Date(task.dueDate!).toLocaleDateString()}`
+            } 
+            variant="outlined" 
+          />
         )}
         {task.tags?.map(tag => <Chip key={tag} label={tag} variant="outlined" />)}
       </Stack>

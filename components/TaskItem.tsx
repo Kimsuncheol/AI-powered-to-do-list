@@ -53,9 +53,15 @@ export default function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
           )}
           
           <Stack direction="row" spacing={1} sx={{ mt: 1 }}>
-            {task.dueDate && (
+            {(task.startDate || task.dueDate) && (
               <Chip 
-                label={new Date(task.dueDate).toLocaleDateString()} 
+                label={
+                  task.startDate && task.dueDate 
+                    ? `${new Date(task.startDate).toLocaleDateString()} - ${new Date(task.dueDate).toLocaleDateString()}`
+                    : task.dueDate 
+                      ? new Date(task.dueDate).toLocaleDateString() 
+                      : ''
+                } 
                 size="small" 
                 variant="outlined" 
                 color="info"
