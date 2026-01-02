@@ -1,0 +1,20 @@
+{
+  "node": {
+    "706d484603db85f24da231f6c51171a5a90831234c": {
+      "workers": {
+        "app/tasks/new/page": {
+          "moduleId": 12831,
+          "async": false,
+          "exportedName": "runAgentAction",
+          "filename": "Desktop/ai-powered-todo-list/actions/agentActions.ts"
+        }
+      },
+      "layer": {
+        "app/tasks/new/page": "action-browser"
+      },
+      "exportedName": "runAgentAction",
+      "filename": "Desktop/ai-powered-todo-list/actions/agentActions.ts"
+    }
+  },
+  "edge": {}
+}

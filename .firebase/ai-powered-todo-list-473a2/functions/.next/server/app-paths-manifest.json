@@ -1,0 +1,18 @@
+{
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/billing/page": "app/billing/page.js",
+  "/calendar/page": "app/calendar/page.js",
+  "/icon.png/route": "app/icon.png/route.js",
+  "/insight/page": "app/insight/page.js",
+  "/page": "app/page.js",
+  "/profile/page": "app/profile/page.js",
+  "/settings/page": "app/settings/page.js",
+  "/tasks/[id]/edit/page": "app/tasks/[id]/edit/page.js",
+  "/tasks/[id]/page": "app/tasks/[id]/page.js",
+  "/tasks/new/page": "app/tasks/new/page.js",
+  "/template/detail/page": "app/template/detail/page.js",
+  "/template/edit/page": "app/template/edit/page.js",
+  "/template/new/page": "app/template/new/page.js",
+  "/template/page": "app/template/page.js"
+}

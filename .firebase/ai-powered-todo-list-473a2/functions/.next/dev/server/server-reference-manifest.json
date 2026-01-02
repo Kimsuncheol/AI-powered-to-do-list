@@ -1,0 +1,51 @@
+{
+  "node": {
+    "4070eac9598a0b47f895303224e18c16df77b572ba": {
+      "workers": {
+        "app/page": {
+          "moduleId": "[project]/Desktop/ai-powered-todo-list/.next-internal/server/app/page/actions.js { ACTIONS_MODULE0 => \"[project]/Desktop/ai-powered-todo-list/actions/aiActions.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/Desktop/ai-powered-todo-list/actions/agentActions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "parseTaskAction",
+          "filename": "Desktop/ai-powered-todo-list/actions/aiActions.ts"
+        }
+      },
+      "layer": {
+        "app/page": "action-browser"
+      },
+      "filename": "Desktop/ai-powered-todo-list/actions/aiActions.ts",
+      "exportedName": "parseTaskAction"
+    },
+    "703d092d7cf582db79c0878cee8a8546a349b726e5": {
+      "workers": {
+        "app/page": {
+          "moduleId": "[project]/Desktop/ai-powered-todo-list/.next-internal/server/app/page/actions.js { ACTIONS_MODULE0 => \"[project]/Desktop/ai-powered-todo-list/actions/aiActions.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/Desktop/ai-powered-todo-list/actions/agentActions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "runAgentAction",
+          "filename": "Desktop/ai-powered-todo-list/actions/agentActions.ts"
+        }
+      },
+      "layer": {
+        "app/page": "action-browser"
+      },
+      "filename": "Desktop/ai-powered-todo-list/actions/agentActions.ts",
+      "exportedName": "runAgentAction"
+    },
+    "606a87d3906c4024be62e0a4fa88ba6264bfec7d81": {
+      "workers": {
+        "app/tasks/[id]/page": {
+          "moduleId": "[project]/Desktop/ai-powered-todo-list/.next-internal/server/app/tasks/[id]/page/actions.js { ACTIONS_MODULE0 => \"[project]/Desktop/ai-powered-todo-list/actions/aiActions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "generateSubtasksAction",
+          "filename": "Desktop/ai-powered-todo-list/actions/aiActions.ts"
+        }
+      },
+      "layer": {
+        "app/tasks/[id]/page": "action-browser"
+      },
+      "filename": "Desktop/ai-powered-todo-list/actions/aiActions.ts",
+      "exportedName": "generateSubtasksAction"
+    }
+  },
+  "edge": {},
+  "encryptionKey": "wXDdv9TFrbUGUq9McmHwwkkDMbDDwJj6vt1QomsJcFc="
+}

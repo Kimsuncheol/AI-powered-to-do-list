@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///Users/gimseoncheol/Desktop/ai-powered-todo-list/app/template/loading.tsx"],"sourcesContent":["'use client';\nimport { Box, CircularProgress } from '@mui/material';\n\nexport default function TemplateLoading() {\n  return (\n    <Box \n      sx={{ \n        display: 'flex', \n        justifyContent: 'center', \n        alignItems: 'center',\n        minHeight: '80vh' \n      }}\n    >\n      <CircularProgress size={60} thickness={4} sx={{ color: 'primary.main' }} />\n    </Box>\n  );\n}\n"],"names":[],"mappings":";;;;;AACA;AAAA;AADA;;;AAGe,SAAS;IACtB,qBACE,0RAAC,2OAAG;QACF,IAAI;YACF,SAAS;YACT,gBAAgB;YAChB,YAAY;YACZ,WAAW;QACb;kBAEA,cAAA,0RAAC,+RAAgB;YAAC,MAAM;YAAI,WAAW;YAAG,IAAI;gBAAE,OAAO;YAAe;;;;;;;;;;;AAG5E"}}]
+}

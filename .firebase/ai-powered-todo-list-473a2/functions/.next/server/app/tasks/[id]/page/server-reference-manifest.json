@@ -1,0 +1,20 @@
+{
+  "node": {
+    "60290ab38c0360da6e8d09a2e187d86d536a68344c": {
+      "workers": {
+        "app/tasks/[id]/page": {
+          "moduleId": 16512,
+          "async": false,
+          "exportedName": "generateSubtasksAction",
+          "filename": "Desktop/ai-powered-todo-list/actions/aiActions.ts"
+        }
+      },
+      "layer": {
+        "app/tasks/[id]/page": "action-browser"
+      },
+      "exportedName": "generateSubtasksAction",
+      "filename": "Desktop/ai-powered-todo-list/actions/aiActions.ts"
+    }
+  },
+  "edge": {}
+}

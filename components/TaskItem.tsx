@@ -9,7 +9,6 @@ import {
   Chip, 
   Box,
   Stack,
-  Stack,
   Tooltip
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';

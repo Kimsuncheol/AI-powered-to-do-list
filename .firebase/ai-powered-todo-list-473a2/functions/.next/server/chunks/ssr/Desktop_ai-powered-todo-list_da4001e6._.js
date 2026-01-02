@@ -1,0 +1,3 @@
+module.exports=[42463,a=>{"use strict";var b=a.i(70757);a.s(["CircularProgress",()=>b.default])},37856,a=>{"use strict";var b=a.i(92208),c=a.i(40902),d=a.i(42463);function e(){return(0,b.jsx)(c.Box,{sx:{display:"flex",justifyContent:"center",alignItems:"center",minHeight:"80vh"},children:(0,b.jsx)(d.CircularProgress,{size:60,thickness:4,sx:{color:"primary.main"}})})}a.s(["default",()=>e])}];
+
+//# sourceMappingURL=Desktop_ai-powered-todo-list_da4001e6._.js.map

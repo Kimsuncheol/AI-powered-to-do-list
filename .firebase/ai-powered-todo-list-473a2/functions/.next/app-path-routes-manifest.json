@@ -1,0 +1,18 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/billing/page": "/billing",
+  "/calendar/page": "/calendar",
+  "/icon.png/route": "/icon.png",
+  "/insight/page": "/insight",
+  "/page": "/",
+  "/profile/page": "/profile",
+  "/settings/page": "/settings",
+  "/tasks/[id]/edit/page": "/tasks/[id]/edit",
+  "/tasks/[id]/page": "/tasks/[id]",
+  "/tasks/new/page": "/tasks/new",
+  "/template/detail/page": "/template/detail",
+  "/template/edit/page": "/template/edit",
+  "/template/new/page": "/template/new",
+  "/template/page": "/template"
+}

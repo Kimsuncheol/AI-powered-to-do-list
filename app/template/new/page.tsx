@@ -17,7 +17,7 @@ export default function NewTaskTemplate() {
             </Box>
 
             <Grid container spacing={3}>
-                <Grid item xs={12}>
+                <Grid size={12}>
                     <TextField 
                         fullWidth 
                         label="Task Title" 
@@ -26,7 +26,7 @@ export default function NewTaskTemplate() {
                         InputProps={{ sx: { borderRadius: 2 } }}
                     />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid size={12}>
                     <TextField 
                         fullWidth 
                         label="Description" 
@@ -37,7 +37,7 @@ export default function NewTaskTemplate() {
                         InputProps={{ sx: { borderRadius: 2 } }}
                     />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid size={{ xs: 12, sm: 6 }}>
                     <Typography variant="subtitle2" gutterBottom>Priority</Typography>
                     <Box sx={{ display: 'flex', gap: 1 }}>
                         <Chip label="Low" clickable color="default" variant="outlined" />
@@ -45,7 +45,7 @@ export default function NewTaskTemplate() {
                         <Chip label="High" clickable color="error" variant="outlined" />
                     </Box>
                 </Grid>
-                 <Grid item xs={12} sm={6}>
+                 <Grid size={{ xs: 12, sm: 6 }}>
                     <Typography variant="subtitle2" gutterBottom>Due Date</Typography>
                     <TextField 
                         type="date" 
@@ -53,7 +53,7 @@ export default function NewTaskTemplate() {
                         InputProps={{ sx: { borderRadius: 2 } }}
                     />
                 </Grid>
-                <Grid item xs={12} sx={{ mt: 2, display: 'flex', gap: 2 }}>
+                <Grid size={12} sx={{ mt: 2, display: 'flex', gap: 2 }}>
                     <Button 
                         variant="contained" 
                         size="large" 
@@ -64,7 +64,7 @@ export default function NewTaskTemplate() {
                         Create Task
                     </Button>
                      <Button 
-                        variant="soft" 
+                        variant="outlined" 
                         color="secondary"
                         size="large" 
                         fullWidth 

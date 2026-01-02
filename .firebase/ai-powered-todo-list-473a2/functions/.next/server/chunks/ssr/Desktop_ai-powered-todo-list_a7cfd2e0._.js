@@ -1,0 +1,3 @@
+module.exports=[42463,a=>{"use strict";var b=a.i(70757);a.s(["CircularProgress",()=>b.default])},45750,a=>{"use strict";var b=a.i(92208),c=a.i(40902),d=a.i(42463),e=a.i(13151);function f(){return(0,b.jsxs)(c.Box,{sx:{display:"flex",flexDirection:"column",alignItems:"center",mt:10},children:[(0,b.jsx)(d.CircularProgress,{}),(0,b.jsx)(e.Typography,{variant:"body2",color:"text.secondary",sx:{mt:2},children:"Loading calendar..."})]})}a.s(["default",()=>f])}];
+
+//# sourceMappingURL=Desktop_ai-powered-todo-list_a7cfd2e0._.js.map

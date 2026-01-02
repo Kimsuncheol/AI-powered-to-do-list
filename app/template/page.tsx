@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Container, Grid, Card, CardContent, Typography, Button, Box, Paper, Divider } from '@mui/material';
+import { Container, Grid, Card, CardContent, Typography, Button, Box } from '@mui/material';
 import { Add as AddIcon, Edit as EditIcon, Visibility as VisibilityIcon } from '@mui/icons-material';
 import Link from 'next/link';
 
@@ -23,7 +23,7 @@ export default function TemplateGalleryPage() {
 
         <Grid container spacing={4}>
             {/* New Task Template */}
-            <Grid item xs={12} md={4}>
+            <Grid size={{ xs: 12, md: 4 }}>
                 <Card 
                     variant="outlined" 
                     sx={{ 
@@ -57,7 +57,7 @@ export default function TemplateGalleryPage() {
             </Grid>
 
             {/* Task Detail Template */}
-            <Grid item xs={12} md={4}>
+            <Grid size={{ xs: 12, md: 4 }}>
                  <Card 
                     variant="outlined" 
                     sx={{ 
@@ -91,7 +91,7 @@ export default function TemplateGalleryPage() {
             </Grid>
 
             {/* Edit Task Template */}
-             <Grid item xs={12} md={4}>
+             <Grid size={{ xs: 12, md: 4 }}>
                  <Card 
                     variant="outlined" 
                     sx={{ 

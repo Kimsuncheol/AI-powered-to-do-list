@@ -1,0 +1,20 @@
+{
+  "node": {
+    "606a87d3906c4024be62e0a4fa88ba6264bfec7d81": {
+      "workers": {
+        "app/tasks/[id]/page": {
+          "moduleId": "[project]/Desktop/ai-powered-todo-list/.next-internal/server/app/tasks/[id]/page/actions.js { ACTIONS_MODULE0 => \"[project]/Desktop/ai-powered-todo-list/actions/aiActions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "generateSubtasksAction",
+          "filename": "Desktop/ai-powered-todo-list/actions/aiActions.ts"
+        }
+      },
+      "layer": {
+        "app/tasks/[id]/page": "action-browser"
+      },
+      "exportedName": "generateSubtasksAction",
+      "filename": "Desktop/ai-powered-todo-list/actions/aiActions.ts"
+    }
+  },
+  "edge": {}
+}

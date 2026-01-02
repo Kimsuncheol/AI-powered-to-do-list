@@ -1,0 +1,35 @@
+{
+  "node": {
+    "4029fe43aa85c0bb241bda176ecae33328c32e6b1b": {
+      "workers": {
+        "app/page": {
+          "moduleId": 76928,
+          "async": false,
+          "exportedName": "parseTaskAction",
+          "filename": "Desktop/ai-powered-todo-list/actions/aiActions.ts"
+        }
+      },
+      "layer": {
+        "app/page": "action-browser"
+      },
+      "exportedName": "parseTaskAction",
+      "filename": "Desktop/ai-powered-todo-list/actions/aiActions.ts"
+    },
+    "706d484603db85f24da231f6c51171a5a90831234c": {
+      "workers": {
+        "app/page": {
+          "moduleId": 76928,
+          "async": false,
+          "exportedName": "runAgentAction",
+          "filename": "Desktop/ai-powered-todo-list/actions/agentActions.ts"
+        }
+      },
+      "layer": {
+        "app/page": "action-browser"
+      },
+      "exportedName": "runAgentAction",
+      "filename": "Desktop/ai-powered-todo-list/actions/agentActions.ts"
+    }
+  },
+  "edge": {}
+}

@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///Users/gimseoncheol/Desktop/ai-powered-todo-list/app/tasks/layout.tsx"],"sourcesContent":["import { ReactNode } from 'react';\nimport { Container } from '@mui/material';\n\nexport default function TaskDetailLayout({ children }: { children: ReactNode }) {\n  return (\n    <Container maxWidth=\"lg\" sx={{ mt: 4 }}>\n      {children}\n    </Container>\n  )\n}\n"],"names":[],"mappings":";;;;;AACA;;;AAEe,SAAS,iBAAiB,EAAE,QAAQ,EAA2B;IAC5E,qBACE,0RAAC,mQAAS;QAAC,UAAS;QAAK,IAAI;YAAE,IAAI;QAAE;kBAClC;;;;;;AAGP"}}]
+}

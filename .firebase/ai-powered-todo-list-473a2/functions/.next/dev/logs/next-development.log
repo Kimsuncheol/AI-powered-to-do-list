@@ -1,0 +1,256 @@
+[00:00:01.342] Server  LOG     ✓ Ready in 1050ms
+[00:00:41.272] Browser WARN    Image with src "/header-logo.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:01:55.915] Browser WARN    MUI Grid: The `item` prop has been removed and is no longer necessary. You can safely remove it.
+
+[00:01:55.915] Browser WARN    MUI Grid: The `xs` prop has been removed. See https://mui.com/material-ui/migration/upgrade-to-grid-v2/ for migration instructions.
+
+[00:01:55.915] Browser WARN    MUI Grid: The `sm` prop has been removed. See https://mui.com/material-ui/migration/upgrade-to-grid-v2/ for migration instructions.
+
+[00:03:22.075] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="/Desktop/a...">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en">
+                          <body
+-                           className="antigravity-scroll-lock"
+                          >
+                  ...
+
+[00:03:22.075] Browser WARN    Image with src "/header-logo.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:08:33.871] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="/Desktop/a...">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en">
+                          <body
+-                           className="antigravity-scroll-lock"
+                          >
+                  ...
+
+[00:08:33.873] Browser WARN    Image with src "/header-logo.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:10:27.005] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="/Desktop/a...">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en">
+                          <body
+-                           className="antigravity-scroll-lock"
+                          >
+                  ...
+
+[00:10:27.005] Browser WARN    Image with src "/header-logo.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:14:38.365] Server  LOG     ✓ Compiled in 62ms
+[00:14:47.119] Server  LOG     ✓ Compiled in 10ms
+[00:15:02.667] Server  LOG     ✓ Compiled in 21ms
+[00:16:33.110] Server  LOG     ✓ Compiled in 33ms
+[00:16:36.655] Browser ERROR   uncaughtError: ReferenceError: FacebookShareButton is not defined
+[00:16:36.668] Browser ERROR   uncaughtError: ReferenceError: FacebookShareButton is not defined
+[00:16:37.050] Server  LOG     ✓ Compiled in 339ms
+[00:16:37.089] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:16:37.094] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:16:37.363] Server  LOG     ✓ Compiled in 0ms
+[00:16:37.371] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:16:39.867] Browser WARN    Image with src "/header-logo.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:16:42.114] Browser WARN    Image with src "/header-logo.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:16:42.447] Browser WARN    Image with src "/header-logo.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:16:44.033] Server  LOG     ✓ Compiled in 132ms
+[00:16:45.222] Server  LOG     ✓ Compiled in 58ms
+[00:16:47.135] Server  LOG     ✓ Compiled in 22ms
+[00:16:47.237] Browser ERROR   ./Desktop/ai-powered-todo-list/components/TaskItem.tsx:12:3
+Ecmascript file had an error
+  10 |   Box,
+  11 |   Stack,
+> 12 |   Stack,
+     |   ^^^^^
+  13 |   Tooltip
+  14 | } from '@mui/material';
+  15 | import DeleteIcon from '@mui/icons-material/Delete';
+
+the name `Stack` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./Desktop/ai-powered-todo-list/components/TaskItem.tsx [Client Component Browser]
+    ./Desktop/ai-powered-todo-list/components/TaskList.tsx [Client Component Browser]
+    ./Desktop/ai-powered-todo-list/components/TaskList.tsx [Server Component]
+    ./Desktop/ai-powered-todo-list/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./Desktop/ai-powered-todo-list/components/TaskItem.tsx [Client Component SSR]
+    ./Desktop/ai-powered-todo-list/components/TaskList.tsx [Client Component SSR]
+    ./Desktop/ai-powered-todo-list/components/TaskList.tsx [Server Component]
+    ./Desktop/ai-powered-todo-list/app/page.tsx [Server Component]
+[00:16:47.238] Browser ERROR   ./Desktop/ai-powered-todo-list/components/TaskItem.tsx:12:3
+Ecmascript file had an error
+  10 |   Box,
+  11 |   Stack,
+> 12 |   Stack,
+     |   ^^^^^
+  13 |   Tooltip
+  14 | } from '@mui/material';
+  15 | import DeleteIcon from '@mui/icons-material/Delete';
+
+the name `Stack` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./Desktop/ai-powered-todo-list/components/TaskItem.tsx [Client Component Browser]
+    ./Desktop/ai-powered-todo-list/components/TaskList.tsx [Client Component Browser]
+    ./Desktop/ai-powered-todo-list/components/TaskList.tsx [Server Component]
+    ./Desktop/ai-powered-todo-list/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./Desktop/ai-powered-todo-list/components/TaskItem.tsx [Client Component SSR]
+    ./Desktop/ai-powered-todo-list/components/TaskList.tsx [Client Component SSR]
+    ./Desktop/ai-powered-todo-list/components/TaskList.tsx [Server Component]
+    ./Desktop/ai-powered-todo-list/app/page.tsx [Server Component]
+[00:16:47.238] Browser ERROR   ./Desktop/ai-powered-todo-list/components/TaskItem.tsx:12:3
+Ecmascript file had an error
+  10 |   Box,
+  11 |   Stack,
+> 12 |   Stack,
+     |   ^^^^^
+  13 |   Tooltip
+  14 | } from '@mui/material';
+  15 | import DeleteIcon from '@mui/icons-material/Delete';
+
+the name `Stack` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./Desktop/ai-powered-todo-list/components/TaskItem.tsx [Client Component Browser]
+    ./Desktop/ai-powered-todo-list/components/TaskList.tsx [Client Component Browser]
+    ./Desktop/ai-powered-todo-list/components/TaskList.tsx [Server Component]
+    ./Desktop/ai-powered-todo-list/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./Desktop/ai-powered-todo-list/components/TaskItem.tsx [Client Component SSR]
+    ./Desktop/ai-powered-todo-list/components/TaskList.tsx [Client Component SSR]
+    ./Desktop/ai-powered-todo-list/components/TaskList.tsx [Server Component]
+    ./Desktop/ai-powered-todo-list/app/page.tsx [Server Component]
+[00:16:47.238] Browser ERROR   ./Desktop/ai-powered-todo-list/components/TaskItem.tsx:12:3
+Ecmascript file had an error
+  10 |   Box,
+  11 |   Stack,
+> 12 |   Stack,
+     |   ^^^^^
+  13 |   Tooltip
+  14 | } from '@mui/material';
+  15 | import DeleteIcon from '@mui/icons-material/Delete';
+
+the name `Stack` is defined multiple times
+
+Import traces:
+  Client Component Browser:
+    ./Desktop/ai-powered-todo-list/components/TaskItem.tsx [Client Component Browser]
+    ./Desktop/ai-powered-todo-list/components/TaskList.tsx [Client Component Browser]
+    ./Desktop/ai-powered-todo-list/components/TaskList.tsx [Server Component]
+    ./Desktop/ai-powered-todo-list/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./Desktop/ai-powered-todo-list/components/TaskItem.tsx [Client Component SSR]
+    ./Desktop/ai-powered-todo-list/components/TaskList.tsx [Client Component SSR]
+    ./Desktop/ai-powered-todo-list/components/TaskList.tsx [Server Component]
+    ./Desktop/ai-powered-todo-list/app/page.tsx [Server Component]

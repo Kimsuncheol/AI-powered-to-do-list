@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///Users/gimseoncheol/Desktop/ai-powered-todo-list/app/billing/layout.tsx"],"sourcesContent":["export default function BillingLayout({\n  children,\n}: {\n  children: React.ReactNode;\n}) {\n  return children;\n}\n"],"names":[],"mappings":";;;;AAAe,SAAS,cAAc,EACpC,QAAQ,EAGT;IACC,OAAO;AACT"}}]
+}

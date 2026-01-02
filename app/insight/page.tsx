@@ -101,7 +101,7 @@ export default function InsightPage() {
       {/* Stat Cards */}
       <Grid container spacing={3} sx={{ mb: 4 }}>
         {statCards.map((stat) => (
-          <Grid item xs={12} sm={6} md={3} key={stat.title}>
+          <Grid size={{ xs: 12, sm: 6, md: 3 }} key={stat.title}>
             <Card
               elevation={0}
               sx={{
@@ -200,7 +200,7 @@ export default function InsightPage() {
             { label: '🟢 Low', value: analytics.tasksByPriority.low, color: '#4caf50' },
             { label: '⚪ None', value: analytics.tasksByPriority.none, color: '#9e9e9e' },
           ].map((priority) => (
-            <Grid item xs={6} sm={3} key={priority.label}>
+            <Grid size={{ xs: 6, sm: 3 }} key={priority.label}>
               <Box
                 sx={{
                   p: 2,

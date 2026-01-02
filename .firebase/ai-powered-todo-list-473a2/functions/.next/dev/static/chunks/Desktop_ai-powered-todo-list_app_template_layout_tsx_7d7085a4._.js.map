@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///Users/gimseoncheol/Desktop/ai-powered-todo-list/app/template/layout.tsx"],"sourcesContent":["'use client';\nimport { Box } from '@mui/material';\n\nexport default function TemplateLayout({\n  children,\n}: {\n  children: React.ReactNode;\n}) {\n  return (\n    <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>\n      {children}\n    </Box>\n  );\n}\n"],"names":[],"mappings":";;;;;AACA;AADA;;;AAGe,SAAS,eAAe,EACrC,QAAQ,EAGT;IACC,qBACE,yOAAC,8OAAG;QAAC,IAAI;YAAE,WAAW;YAAS,SAAS;QAAqB;kBAC1D;;;;;;AAGP;KAVwB"}}]
+}

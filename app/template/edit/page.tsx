@@ -17,7 +17,7 @@ export default function EditTaskTemplate() {
             </Box>
 
             <Grid container spacing={4}>
-                <Grid item xs={12}>
+                <Grid size={12}>
                     <TextField 
                         fullWidth 
                         label="Task Title" 
@@ -27,7 +27,7 @@ export default function EditTaskTemplate() {
                         InputLabelProps={{ shrink: true }}
                     />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid size={12}>
                     <TextField 
                         fullWidth 
                         label="Notes" 
@@ -40,18 +40,18 @@ export default function EditTaskTemplate() {
                     />
                 </Grid>
                 
-                 <Grid item xs={12}>
+                 <Grid size={12}>
                     <Divider />
                 </Grid>
 
-                <Grid item xs={12} sm={6}>
+                <Grid size={{ xs: 12, sm: 6 }}>
                     <FormControlLabel control={<Switch defaultChecked />} label="Mark as Important" />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid size={{ xs: 12, sm: 6 }}>
                      <FormControlLabel control={<Switch />} label="Completed" />
                 </Grid>
 
-                <Grid item xs={12} sx={{ mt: 2, display: 'flex', gap: 2, justifyContent: 'flex-end' }}>
+                <Grid size={12} sx={{ mt: 2, display: 'flex', gap: 2, justifyContent: 'flex-end' }}>
                      <Button 
                         variant="outlined" 
                         size="large" 
